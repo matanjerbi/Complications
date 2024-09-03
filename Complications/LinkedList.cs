@@ -41,7 +41,7 @@ namespace Complications
             while (current != null)
             {
                 if (index == 0) allList += current.ToString();
-                allList += "->" + current.ToString();  
+                else allList += "->" + current.ToString();  
                 current = current.Next;  
                 index++;
             }
@@ -93,8 +93,6 @@ namespace Complications
 
         }
             
-
-
         public void RemoveIndex(int index)
         {
             Node current = head;
