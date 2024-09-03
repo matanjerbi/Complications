@@ -84,6 +84,17 @@ namespace Complications
             }
         }
 
+        public void RemoveAllValues(int value)
+        {
+            while (Find(value) != -1 && head != null)
+            {
+                RemoveValue(value);
+            }
+
+        }
+            
+
+
         public void RemoveIndex(int index)
         {
             Node current = head;
