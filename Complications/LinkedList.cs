@@ -37,10 +37,13 @@ namespace Complications
         {
             Node current = head;  
             string allList = string.Empty;
+            int index = 0;
             while (current != null)
             {
+                if (index == 0) allList += current.ToString();
                 allList += "->" + current.ToString();  
                 current = current.Next;  
+                index++;
             }
             return allList;
         }
@@ -66,7 +69,6 @@ namespace Complications
                 head = head.Next;  
                 return;
             }
-
             Node current = head;  
             Node previous = null;
 
@@ -74,15 +76,61 @@ namespace Complications
             {
                 if (current.GetValue() == value)
                 {
-                    if (previous != null)
-                    {
-                        previous.Next = current.Next;
-                    }
-                    return;  
+                    previous.Next = current.Next;
+                    return;                    
                 }
                 previous = current;  
                 current = current.Next;  
             }
+        }
+
+        public void RemoveIndex(int index)
+        {
+            Node current = head;
+            if (current == null) return;
+            Node privious = null;
+            while (current != null)
+            {
+                if (current.GetValue() == index)
+                {
+                    privious.Next = current.Next;
+                    return;
+                }
+                privious = current;
+                current = current.Next;
+            }
+        }
+
+        public int Find(int value)
+        {
+            Node current = head;
+            int index = 0;
+            while (current != null)
+            {
+                if (current.GetValue() == value)
+                {
+                    return index;
+                }
+                index++;
+                current = current.Next;
+            }
+            return -1;
+        }
+
+        public int Get(int index)
+        {
+            Node current = head;
+            int i = 0;
+            while (current != null)
+            {
+                if (i == index)
+                {
+                    return current.GetValue();
+                }
+                i++;
+                current = current.Next;
+            }
+            return -1;
         }
     }
 }
