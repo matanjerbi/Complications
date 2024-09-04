@@ -1,9 +1,8 @@
-﻿using System;
+﻿
+using System;
 
 namespace Complications
 {
-    
-    
     internal class LinkedList
     {
         private Node head = null;
@@ -15,34 +14,34 @@ namespace Complications
             this.head = head;
         }
 
-        
-        public void Add(Node node)
+        public void Add(int value)
         {
+            Node node = new Node(value);
             if (head == null)
             {
                 head = node;
             }
             else
             {
-                Node current = head;  
+                Node current = head;
                 while (current.Next != null)
                 {
-                    current = current.Next;  
+                    current = current.Next;
                 }
-                current.Next = node;  
+                current.Next = node;
             }
         }
 
         public string Display()
         {
-            Node current = head;  
+            Node current = head;
             string allList = string.Empty;
             int index = 0;
             while (current != null)
             {
                 if (index == 0) allList += current.ToString();
-                else allList += "->" + current.ToString();  
-                current = current.Next;  
+                else allList += "->" + current.ToString();
+                current = current.Next;
                 index++;
             }
             return allList;
@@ -51,25 +50,26 @@ namespace Complications
         public int Length()
         {
             int count = 0;
-            Node current = head;  
+            Node current = head;
             while (current != null)
             {
                 count++;
-                current = current.Next; 
+                current = current.Next;
             }
             return count;
         }
 
         public void RemoveValue(int value)
         {
-            if (head == null) return;  
+            if (head == null) return;
 
             if (head.GetValue() == value)
             {
-                head = head.Next;  
+                head = head.Next;
                 return;
             }
-            Node current = head;  
+
+            Node current = head;
             Node previous = null;
 
             while (current != null)
@@ -77,10 +77,10 @@ namespace Complications
                 if (current.GetValue() == value)
                 {
                     previous.Next = current.Next;
-                    return;                    
+                    return;
                 }
-                previous = current;  
-                current = current.Next;  
+                previous = current;
+                current = current.Next;
             }
         }
 
@@ -90,23 +90,32 @@ namespace Complications
             {
                 RemoveValue(value);
             }
-
         }
-            
+
         public void RemoveIndex(int index)
         {
-            Node current = head;
-            if (current == null) return;
-            Node privious = null;
-            while (current != null)
+            if (head == null) return;
+
+            if (index == 0)
             {
-                if (current.GetValue() == index)
-                {
-                    privious.Next = current.Next;
-                    return;
-                }
-                privious = current;
+                head = head.Next;
+                return;
+            }
+
+            Node current = head;
+            Node previous = null;
+            int counter = 0;
+
+            while (current != null && counter < index)
+            {
+                previous = current;
                 current = current.Next;
+                counter++;
+            }
+
+            if (current != null)
+            {
+                previous.Next = current.Next;
             }
         }
 
@@ -139,7 +148,7 @@ namespace Complications
                 i++;
                 current = current.Next;
             }
-            return -1;
+            return -1;  
         }
     }
 }
